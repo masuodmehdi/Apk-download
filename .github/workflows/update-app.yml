@@ -1,134 +1,34 @@
-name: Fetch and Upload Latest Code on the Go
+name: Fetch Code on the Go
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 */12 * * *'
 
 permissions:
   contents: write
 
 jobs:
-  fetch-latest-apk:
+  upload-apk:
     runs-on: ubuntu-latest
-    outputs:
-      download_url: ${{ steps.upload.outputs.download_url }}
-      version: ${{ steps.find_version.outputs.version }}
-    
     steps:
-      - name: Find latest version from server
-        id: find_version
+      - name: Download APK v26.16
         run: |
-          # دریافت لیست فایل‌ها از سرور
-          INDEX_URL="https://download.appdevforall.org/"
+          curl -L -o "CodeOnTheGo-latest.apk" \
+            "https://download.appdevforall.org/CodeOnTheGo-release26.16-armv8a.apk"
           
-          # دریافت و مرتب‌سازی نسخه‌ها (پشتیبانی از فرمت 26.07 و 26.16)
-          FILE_LIST=$(curl -s "$INDEX_URL" | grep -oP 'CodeOnTheGo-release[\d.]+-armv8a\.apk' | sort -t. -k1,1n -k2,2n)
-          
-          # پیدا کردن آخرین نسخه
-          LATEST_FILE=$(echo "$FILE_LIST" | tail -1)
-          
-          if [ -z "$LATEST_FILE" ]; then
-            echo "❌ هیچ فایلی پیدا نشد"
+          # بررسی حجم فایل
+          if [ $(stat -c%s "CodeOnTheGo-latest.apk") -lt 1000000 ]; then
+            echo "❌ فایل خراب است یا حجمش کم است"
             exit 1
           fi
-          
-          # استخراج نسخه (مثل 26.07 یا 26.16)
-          VERSION=$(echo "$LATEST_FILE" | grep -oP 'release\K[\d.]+')
-          
-          echo "✅ آخرین نسخه پیدا شد: $VERSION"
-          echo "filename=$LATEST_FILE" >> $GITHUB_OUTPUT
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          
-          echo "📥 فایل: $LATEST_FILE"
-      
-      - name: Download latest APK
-        id: download
-        run: |
-          BASE_URL="https://download.appdevforall.org/"
-          FILE_NAME="${{ steps.find_version.outputs.filename }}"
-          
-          echo "در حال دانلود از: ${BASE_URL}${FILE_NAME}"
-          curl -L -o "CodeOnTheGo-latest.apk" "${BASE_URL}${FILE_NAME}"
-          
-          if [ -f "CodeOnTheGo-latest.apk" ] && [ $(stat -c%s "CodeOnTheGo-latest.apk") -gt 1000000 ]; then
-            FILE_SIZE=$(du -h "CodeOnTheGo-latest.apk" | cut -f1)
-            echo "✅ دانلود موفق - حجم: $FILE_SIZE"
-            echo "status=success" >> $GITHUB_OUTPUT
-          else
-            echo "❌ خطا در دانلود فایل"
-            exit 1
-          fi
-      
-      - name: Check if version already exists
-        id: check_release
-        run: |
-          VERSION="${{ steps.find_version.outputs.version }}"
-          TAG_NAME="v${VERSION}"
-          
-          if gh release view "$TAG_NAME" &>/dev/null; then
-            echo "⚠️ نسخه $VERSION قبلاً آپلود شده است"
-            echo "exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Create GitHub Release
-        if: steps.check_release.outputs.exists == 'false'
-        id: create_release
+          echo "✅ دانلود موفق"
+
+      - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ steps.find_version.outputs.version }}
-          name: "Code on the Go - نسخه ${{ steps.find_version.outputs.version }}"
-          body: |
-            ## 📱 Code on the Go - بروزرسانی خودکار
-            
-            ### جزئیات نسخه
-            - **نسخه:** ${{ steps.find_version.outputs.version }}
-            - **تاریخ دریافت:** $(date +'%Y-%m-%d %H:%M:%S')
-            - **منبع:** download.appdevforall.org
-            - **معماری:** ARMv8a (64-bit)
-            
-            ### 🔧 نصب
-            1. فایل APK را دانلود کنید
-            2. گزینه "نصب از منابع ناشناس" را فعال کنید
-            3. فایل را نصب کنید
-            
-            > ⚠️ این فایل به صورت خودکار از سرور رسمی دریافت شده است
+          tag_name: v26.16
+          name: "Code on the Go - v26.16"
+          files: CodeOnTheGo-latest.apk
           draft: false
           prerelease: false
-          files: CodeOnTheGo-latest.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
-      - name: Get download URL
-        id: upload
-        if: steps.check_release.outputs.exists == 'false'
-        run: |
-          VERSION="${{ steps.find_version.outputs.version }}"
-          TAG_NAME="v${VERSION}"
-          REPO="${{ github.repository }}"
-          
-          DOWNLOAD_URL="https://github.com/${REPO}/releases/download/${TAG_NAME}/CodeOnTheGo-latest.apk"
-          
-          echo "download_url=$DOWNLOAD_URL" >> $GITHUB_OUTPUT
-          
-          echo ""
-          echo "══════════════════════════════════════════════════════"
-          echo "✅ لینک مستقیم دانلود آخرین نسخه ($VERSION):"
-          echo "$DOWNLOAD_URL"
-          echo "══════════════════════════════════════════════════════"
-      
-      - name: Show if already exists
-        if: steps.check_release.outputs.exists == 'true'
-        run: |
-          VERSION="${{ steps.find_version.outputs.version }}"
-          echo "══════════════════════════════════════════════════════"
-          echo "⚠️ نسخه $VERSION قبلاً آپلود شده است"
-          echo "══════════════════════════════════════════════════════"
-          
-          echo ""
-          echo "📥 لینک آخرین نسخه موجود:"
-          echo "https://github.com/${{ github.repository }}/releases/download/v${VERSION}/CodeOnTheGo-latest.apk"
