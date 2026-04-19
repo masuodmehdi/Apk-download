@@ -1,0 +1,141 @@
+name: Fetch and Upload Latest Code on the Go
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */12 * * *'  # هر 12 ساعت یکبار
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-latest-apk:
+    runs-on: ubuntu-latest
+    outputs:
+      download_url: ${{ steps.upload.outputs.download_url }}
+      version: ${{ steps.find_version.outputs.version }}
+    
+    steps:
+      - name: Find latest version from server
+        id: find_version
+        run: |
+          # دریافت لیست فایل‌های موجود از سرور
+          INDEX_URL="https://download.appdevforall.org/"
+          
+          # دریافت لیست فایل‌های APK با استفاده از curl
+          FILE_LIST=$(curl -s "$INDEX_URL" | grep -oP 'CodeOnTheGo-release[0-9]+(?:\.[0-9]+)?-armv8a\.apk' | sort -V)
+          
+          # پیدا کردن آخرین نسخه (بر اساس عدد تاریخ)
+          LATEST_FILE=$(echo "$FILE_LIST" | tail -1)
+          
+          if [ -z "$LATEST_FILE" ]; then
+            echo "❌ هیچ فایلی پیدا نشد"
+            exit 1
+          fi
+          
+          # استخراج نسخه از نام فایل
+          VERSION=$(echo "$LATEST_FILE" | grep -oP 'release\K[0-9]+(?:\.[0-9]+)?')
+          
+          echo "✅ آخرین نسخه پیدا شد: $VERSION"
+          echo "filename=$LATEST_FILE" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          
+          echo "📥 فایل: $LATEST_FILE"
+      
+      - name: Download latest APK
+        id: download
+        run: |
+          BASE_URL="https://download.appdevforall.org/"
+          FILE_NAME="${{ steps.find_version.outputs.filename }}"
+          
+          echo "در حال دانلود از: ${BASE_URL}${FILE_NAME}"
+          curl -L -o "CodeOnTheGo-latest.apk" "${BASE_URL}${FILE_NAME}"
+          
+          # بررسی موفقیت دانلود
+          if [ -f "CodeOnTheGo-latest.apk" ] && [ $(stat -c%s "CodeOnTheGo-latest.apk") -gt 1000000 ]; then
+            FILE_SIZE=$(du -h "CodeOnTheGo-latest.apk" | cut -f1)
+            echo "✅ دانلود موفق - حجم: $FILE_SIZE"
+            echo "status=success" >> $GITHUB_OUTPUT
+          else
+            echo "❌ خطا در دانلود فایل"
+            exit 1
+          fi
+      
+      - name: Check if version already exists
+        id: check_release
+        run: |
+          VERSION="${{ steps.find_version.outputs.version }}"
+          TAG_NAME="v${VERSION}"
+          
+          # بررسی是否存在 این نسخه قبلاً آپلود شده
+          if gh release view "$TAG_NAME" &>/dev/null; then
+            echo "⚠️ نسخه $VERSION قبلاً آپلود شده است"
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Create GitHub Release
+        if: steps.check_release.outputs.exists == 'false'
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.find_version.outputs.version }}
+          name: "Code on the Go - نسخه ${{ steps.find_version.outputs.version }}"
+          body: |
+            ## 📱 Code on the Go - بروزرسانی خودکار
+            
+            ### جزئیات نسخه
+            - **نسخه:** ${{ steps.find_version.outputs.version }}
+            - **تاریخ دریافت:** $(date +'%Y-%m-%d %H:%M:%S')
+            - **منبع:** download.appdevforall.org
+            - **معماری:** ARMv8a (64-bit)
+            
+            ### 🔧 نصب
+            1. فایل APK را دانلود کنید
+            2. گزینه "نصب از منابع ناشناس" را فعال کنید
+            3. فایل را نصب کنید
+            
+            > ⚠️ این فایل به صورت خودکار از سرور رسمی دریافت شده است
+          draft: false
+          prerelease: false
+          files: CodeOnTheGo-latest.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Get download URL
+        id: upload
+        if: steps.check_release.outputs.exists == 'false'
+        run: |
+          VERSION="${{ steps.find_version.outputs.version }}"
+          TAG_NAME="v${VERSION}"
+          REPO="${{ github.repository }}"
+          
+          # صبر کوتاه برای اطمینان از در دسترس بودن فایل
+          sleep 5
+          
+          # دریافت لینک دانلود از API
+          DOWNLOAD_URL="https://github.com/${REPO}/releases/download/${TAG_NAME}/CodeOnTheGo-latest.apk"
+          
+          echo "download_url=$DOWNLOAD_URL" >> $GITHUB_OUTPUT
+          
+          echo ""
+          echo "══════════════════════════════════════════════════════"
+          echo "✅ لینک مستقیم دانلود:"
+          echo "$DOWNLOAD_URL"
+          echo "══════════════════════════════════════════════════════"
+      
+      - name: Show if already exists
+        if: steps.check_release.outputs.exists == 'true'
+        run: |
+          echo "══════════════════════════════════════════════════════"
+          echo "⚠️ آخرین نسخه قبلاً آپلود شده است"
+          echo "نسخه: ${{ steps.find_version.outputs.version }}"
+          echo "══════════════════════════════════════════════════════"
+          
+          # نمایش لینک آخرین نسخه موجود
+          echo ""
+          echo "📥 لینک آخرین نسخه موجود:"
+          echo "https://github.com/${{ github.repository }}/releases/latest"
