@@ -3,7 +3,7 @@ name: Fetch and Upload Latest Code on the Go
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 */12 * * *'  # هر 12 ساعت یکبار
+    - cron: '0 */12 * * *'
 
 permissions:
   contents: write
@@ -19,13 +19,13 @@ jobs:
       - name: Find latest version from server
         id: find_version
         run: |
-          # دریافت لیست فایل‌های موجود از سرور
+          # دریافت لیست فایل‌ها از سرور
           INDEX_URL="https://download.appdevforall.org/"
           
-          # دریافت لیست فایل‌های APK با استفاده از curl
-          FILE_LIST=$(curl -s "$INDEX_URL" | grep -oP 'CodeOnTheGo-release[0-9]+(?:\.[0-9]+)?-armv8a\.apk' | sort -V)
+          # دریافت و مرتب‌سازی نسخه‌ها (پشتیبانی از فرمت 26.07 و 26.16)
+          FILE_LIST=$(curl -s "$INDEX_URL" | grep -oP 'CodeOnTheGo-release[\d.]+-armv8a\.apk' | sort -t. -k1,1n -k2,2n)
           
-          # پیدا کردن آخرین نسخه (بر اساس عدد تاریخ)
+          # پیدا کردن آخرین نسخه
           LATEST_FILE=$(echo "$FILE_LIST" | tail -1)
           
           if [ -z "$LATEST_FILE" ]; then
@@ -33,8 +33,8 @@ jobs:
             exit 1
           fi
           
-          # استخراج نسخه از نام فایل
-          VERSION=$(echo "$LATEST_FILE" | grep -oP 'release\K[0-9]+(?:\.[0-9]+)?')
+          # استخراج نسخه (مثل 26.07 یا 26.16)
+          VERSION=$(echo "$LATEST_FILE" | grep -oP 'release\K[\d.]+')
           
           echo "✅ آخرین نسخه پیدا شد: $VERSION"
           echo "filename=$LATEST_FILE" >> $GITHUB_OUTPUT
@@ -51,7 +51,6 @@ jobs:
           echo "در حال دانلود از: ${BASE_URL}${FILE_NAME}"
           curl -L -o "CodeOnTheGo-latest.apk" "${BASE_URL}${FILE_NAME}"
           
-          # بررسی موفقیت دانلود
           if [ -f "CodeOnTheGo-latest.apk" ] && [ $(stat -c%s "CodeOnTheGo-latest.apk") -gt 1000000 ]; then
             FILE_SIZE=$(du -h "CodeOnTheGo-latest.apk" | cut -f1)
             echo "✅ دانلود موفق - حجم: $FILE_SIZE"
@@ -67,7 +66,6 @@ jobs:
           VERSION="${{ steps.find_version.outputs.version }}"
           TAG_NAME="v${VERSION}"
           
-          # بررسی是否存在 این نسخه قبلاً آپلود شده
           if gh release view "$TAG_NAME" &>/dev/null; then
             echo "⚠️ نسخه $VERSION قبلاً آپلود شده است"
             echo "exists=true" >> $GITHUB_OUTPUT
@@ -113,29 +111,24 @@ jobs:
           TAG_NAME="v${VERSION}"
           REPO="${{ github.repository }}"
           
-          # صبر کوتاه برای اطمینان از در دسترس بودن فایل
-          sleep 5
-          
-          # دریافت لینک دانلود از API
           DOWNLOAD_URL="https://github.com/${REPO}/releases/download/${TAG_NAME}/CodeOnTheGo-latest.apk"
           
           echo "download_url=$DOWNLOAD_URL" >> $GITHUB_OUTPUT
           
           echo ""
           echo "══════════════════════════════════════════════════════"
-          echo "✅ لینک مستقیم دانلود:"
+          echo "✅ لینک مستقیم دانلود آخرین نسخه ($VERSION):"
           echo "$DOWNLOAD_URL"
           echo "══════════════════════════════════════════════════════"
       
       - name: Show if already exists
         if: steps.check_release.outputs.exists == 'true'
         run: |
+          VERSION="${{ steps.find_version.outputs.version }}"
           echo "══════════════════════════════════════════════════════"
-          echo "⚠️ آخرین نسخه قبلاً آپلود شده است"
-          echo "نسخه: ${{ steps.find_version.outputs.version }}"
+          echo "⚠️ نسخه $VERSION قبلاً آپلود شده است"
           echo "══════════════════════════════════════════════════════"
           
-          # نمایش لینک آخرین نسخه موجود
           echo ""
           echo "📥 لینک آخرین نسخه موجود:"
-          echo "https://github.com/${{ github.repository }}/releases/latest"
+          echo "https://github.com/${{ github.repository }}/releases/download/v${VERSION}/CodeOnTheGo-latest.apk"
