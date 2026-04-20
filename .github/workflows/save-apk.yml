@@ -2,8 +2,6 @@ name: Save APK in Repository
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '0 */12 * * *'
 
 permissions:
   contents: write
@@ -11,58 +9,87 @@ permissions:
 jobs:
   save-apk-in-repo:
     runs-on: ubuntu-latest
+    timeout-minutes: 10  # افزایش تایم‌اوت به ۱۰ دقیقه
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Download latest APK
-        id: download
+      - name: Test network connectivity
         run: |
-          # دانلود آخرین نسخه (آدرس مستقیم)
+          echo "=== بررسی اتصال به سرور ==="
+          ping -c 2 download.appdevforall.org || echo "⚠️ پینگ جواب نداد"
+          echo ""
+          echo "=== بررسی DNS ==="
+          nslookup download.appdevforall.org || echo "⚠️ DNS جواب نداد"
+          echo ""
+          echo "=== تست curl با جزئیات ==="
+          curl -v --connect-timeout 10 --max-time 30 \
+            https://download.appdevforall.org/ || echo "❌ اتصال برقرار نشد"
+
+      - name: Download latest APK with retry
+        id: download
+        continue-on-error: false
+        run: |
           APK_URL="https://download.appdevforall.org/CodeOnTheGo-release26.16-armv8a.apk"
           
-          # ذخیره در پوشه مشخص (مثلاً apk/)
-          mkdir -p apk
-          curl -L -o "apk/CodeOnTheGo-latest.apk" "$APK_URL"
+          echo "آدرس: $APK_URL"
+          echo "شروع دانلود..."
           
-          # بررسی حجم فایل
-          FILE_SIZE=$(stat -c%s "apk/CodeOnTheGo-latest.apk")
-          if [ $FILE_SIZE -lt 1000000 ]; then
-            echo "❌ فایل خراب است (حجم: $FILE_SIZE بایت)"
+          # دانلود با retry و نمایش دقیق خطا
+          curl --fail --location \
+               --connect-timeout 30 \
+               --max-time 120 \
+               --retry 3 \
+               --retry-delay 5 \
+               --verbose \
+               -o "CodeOnTheGo-latest.apk" \
+               "$APK_URL"
+          
+          # بررسی نتیجه
+          if [ $? -eq 0 ] && [ -f "CodeOnTheGo-latest.apk" ]; then
+            FILE_SIZE=$(stat -c%s "CodeOnTheGo-latest.apk" 2>/dev/null || stat -f%z "CodeOnTheGo-latest.apk" 2>/dev/null)
+            if [ "$FILE_SIZE" -gt 1000000 ]; then
+              echo "✅ دانلود موفق - حجم: $(du -h CodeOnTheGo-latest.apk | cut -f1)"
+              mkdir -p apk
+              cp CodeOnTheGo-latest.apk apk/
+            else
+              echo "❌ حجم فایل خیلی کم است: $FILE_SIZE بایت"
+              exit 1
+            fi
+          else
+            echo "❌ دانلود ناموفق بود"
             exit 1
           fi
-          
-          echo "✅ دانلود موفق - حجم: $(du -h apk/CodeOnTheGo-latest.apk | cut -f1)"
-          echo "version=26.16" >> $GITHUB_OUTPUT
 
-      - name: Commit and push APK to repository
+      - name: Commit and push APK
+        if: steps.download.outcome == 'success'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
-          # افزودن فایل به git
           git add apk/CodeOnTheGo-latest.apk
           
-          # فقط در صورت وجود تغییر، commit کن
           if git diff --cached --quiet; then
             echo "⚠️ هیچ تغییر جدیدی وجود ندارد"
           else
-            git commit -m "🤖 بروزرسانی خودکار APK - نسخه ${{ steps.download.outputs.version }}"
+            git commit -m "🤖 بروزرسانی خودکار APK"
             git push
-            echo "✅ فایل APK در مخزن ذخیره شد"
+            echo "✅ فایل در مخزن ذخیره شد"
           fi
 
-      - name: Show download link
+      - name: Show result
+        if: always()
         run: |
-          REPO="${{ github.repository }}"
-          echo ""
-          echo "══════════════════════════════════════════════════════"
-          echo "✅ فایل در مخزن ذخیره شد"
-          echo ""
-          echo "📥 لینک مستقیم دانلود (بدون ریدایرکت):"
-          echo "https://raw.githubusercontent.com/${REPO}/main/apk/CodeOnTheGo-latest.apk"
-          echo ""
-          echo "🌐 یا از طریق GitHub:"
-          echo "https://github.com/${REPO}/blob/main/apk/CodeOnTheGo-latest.apk"
-          echo "══════════════════════════════════════════════════════"
+          if [ -f "apk/CodeOnTheGo-latest.apk" ]; then
+            echo "══════════════════════════════════════════════════════"
+            echo "✅ فایل با موفقیت ذخیره شد"
+            echo "📥 لینک: https://raw.githubusercontent.com/${{ github.repository }}/main/apk/CodeOnTheGo-latest.apk"
+            echo "══════════════════════════════════════════════════════"
+          else
+            echo "══════════════════════════════════════════════════════"
+            echo "❌ خطا: فایل دانلود نشد"
+            echo "لطفاً خروجی بخش 'Test network connectivity' را بررسی کنید"
+            echo "══════════════════════════════════════════════════════"
+            exit 1
+          fi
