@@ -1,0 +1,68 @@
+name: Save APK in Repository
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */12 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  save-apk-in-repo:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download latest APK
+        id: download
+        run: |
+          # دانلود آخرین نسخه (آدرس مستقیم)
+          APK_URL="https://download.appdevforall.org/CodeOnTheGo-release26.16-armv8a.apk"
+          
+          # ذخیره در پوشه مشخص (مثلاً apk/)
+          mkdir -p apk
+          curl -L -o "apk/CodeOnTheGo-latest.apk" "$APK_URL"
+          
+          # بررسی حجم فایل
+          FILE_SIZE=$(stat -c%s "apk/CodeOnTheGo-latest.apk")
+          if [ $FILE_SIZE -lt 1000000 ]; then
+            echo "❌ فایل خراب است (حجم: $FILE_SIZE بایت)"
+            exit 1
+          fi
+          
+          echo "✅ دانلود موفق - حجم: $(du -h apk/CodeOnTheGo-latest.apk | cut -f1)"
+          echo "version=26.16" >> $GITHUB_OUTPUT
+
+      - name: Commit and push APK to repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # افزودن فایل به git
+          git add apk/CodeOnTheGo-latest.apk
+          
+          # فقط در صورت وجود تغییر، commit کن
+          if git diff --cached --quiet; then
+            echo "⚠️ هیچ تغییر جدیدی وجود ندارد"
+          else
+            git commit -m "🤖 بروزرسانی خودکار APK - نسخه ${{ steps.download.outputs.version }}"
+            git push
+            echo "✅ فایل APK در مخزن ذخیره شد"
+          fi
+
+      - name: Show download link
+        run: |
+          REPO="${{ github.repository }}"
+          echo ""
+          echo "══════════════════════════════════════════════════════"
+          echo "✅ فایل در مخزن ذخیره شد"
+          echo ""
+          echo "📥 لینک مستقیم دانلود (بدون ریدایرکت):"
+          echo "https://raw.githubusercontent.com/${REPO}/main/apk/CodeOnTheGo-latest.apk"
+          echo ""
+          echo "🌐 یا از طریق GitHub:"
+          echo "https://github.com/${REPO}/blob/main/apk/CodeOnTheGo-latest.apk"
+          echo "══════════════════════════════════════════════════════"
