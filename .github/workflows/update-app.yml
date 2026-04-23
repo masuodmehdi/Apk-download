@@ -1,34 +1,119 @@
-name: Fetch Code on the Go
+name: Copy Release Asset to Repository
 
 on:
   workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'نسخه مورد نظر (مثال: v26.16)'
+        required: true
+        default: 'v26.16'
 
 permissions:
   contents: write
 
 jobs:
-  upload-apk:
+  copy-asset:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
     steps:
-      - name: Download APK v26.16
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get Release Asset URL
+        id: get_asset
         run: |
-          curl -L -o "CodeOnTheGo-latest.apk" \
-            "https://download.appdevforall.org/CodeOnTheGo-release26.16-armv8a.apk"
+          REPO="${{ github.repository }}"
+          TAG="${{ github.event.inputs.tag_name }}"
           
-          # بررسی حجم فایل
-          if [ $(stat -c%s "CodeOnTheGo-latest.apk") -lt 1000000 ]; then
-            echo "❌ فایل خراب است یا حجمش کم است"
+          echo "جستجوی فایل APK در ریلیز ${TAG}..."
+          
+          # دریافت اطلاعات ریلیز از API گیت‌هاب
+          RELEASE_DATA=$(curl -s \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${REPO}/releases/tags/${TAG}")
+          
+          # جستجوی فایل APK در assets
+          ASSET_URL=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | endswith(".apk")) | .url')
+          
+          if [ -z "$ASSET_URL" ] || [ "$ASSET_URL" = "null" ]; then
+            echo "❌ فایل APK در ریلیز ${TAG} پیدا نشد"
             exit 1
           fi
-          echo "✅ دانلود موفق"
+          
+          echo "✅ فایل پیدا شد"
+          echo "asset_url=${ASSET_URL}" >> $GITHUB_OUTPUT
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v26.16
-          name: "Code on the Go - v26.16"
-          files: CodeOnTheGo-latest.apk
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download Asset Using GitHub API
+        id: download
+        run: |
+          ASSET_URL="${{ steps.get_asset.outputs.asset_url }}"
+          
+          echo "در حال دانلود فایل از API گیت‌هاب..."
+          
+          # دانلود فایل از طریق API (بدون ریدایرکت به CDN)
+          curl -L \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/octet-stream" \
+            -o "temp_apk_file.apk" \
+            "$ASSET_URL"
+          
+          # بررسی موفقیت دانلود
+          if [ ! -f "temp_apk_file.apk" ]; then
+            echo "❌ دانلود ناموفق بود"
+            exit 1
+          fi
+          
+          FILE_SIZE=$(stat -c%s "temp_apk_file.apk" 2>/dev/null || stat -f%z "temp_apk_file.apk" 2>/dev/null)
+          if [ "$FILE_SIZE" -lt 1000000 ]; then
+            echo "❌ حجم فایل خیلی کم است: ${FILE_SIZE} بایت"
+            exit 1
+          fi
+          
+          # ایجاد پوشه مقصد
+          mkdir -p apk_files
+          
+          # کپی فایل به پوشه مورد نظر
+          VERSION="${{ github.event.inputs.tag_name }}"
+          cp temp_apk_file.apk "apk_files/CodeOnTheGo-${VERSION}.apk"
+          cp temp_apk_file.apk "apk_files/CodeOnTheGo-latest.apk"
+          
+          echo "✅ فایل با موفقیت دانلود و کپی شد"
+          echo "حجم فایل: $(du -h apk_files/CodeOnTheGo-latest.apk | cut -f1)"
+
+      - name: Commit and Push to Repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # افزودن فایل‌ها به git
+          git add apk_files/
+          
+          # بررسی تغییرات
+          if git diff --cached --quiet; then
+            echo "⚠️ هیچ فایل جدیدی برای commit وجود ندارد"
+          else
+            git commit -m "📦 کپی فایل APK از ریلیز ${{ github.event.inputs.tag_name }} به مخزن"
+            git push
+            echo "✅ فایل‌ها با موفقیت به مخزن اضافه شدند"
+          fi
+
+      - name: Show Download Links
+        run: |
+          REPO="${{ github.repository }}"
+          VERSION="${{ github.event.inputs.tag_name }}"
+          
+          echo ""
+          echo "══════════════════════════════════════════════════════"
+          echo "✅ عملیات با موفقیت انجام شد"
+          echo ""
+          echo "📥 لینک‌های دانلود مستقیم (از طریق raw.githubusercontent.com):"
+          echo "نسخه ${VERSION}:"
+          echo "https://raw.githubusercontent.com/${REPO}/main/apk_files/CodeOnTheGo-${VERSION}.apk"
+          echo ""
+          echo "آخرین نسخه:"
+          echo "https://raw.githubusercontent.com/${REPO}/main/apk_files/CodeOnTheGo-latest.apk"
+          echo ""
+          echo "🌐 لینک مشاهده در گیت‌هاب:"
+          echo "https://github.com/${REPO}/tree/main/apk_files"
+          echo "══════════════════════════════════════════════════════"
