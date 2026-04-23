@@ -1,4 +1,4 @@
-name: Copy Release Asset to Repository Root
+name: Split and Copy Large APK to Repository
 
 on:
   workflow_dispatch:
@@ -7,14 +7,18 @@ on:
         description: 'نسخه مورد نظر (مثال: v26.16)'
         required: true
         default: 'v26.16'
+      part_size:
+        description: 'حجم هر پارت (مثال: 95m برای 95 مگابایت)'
+        required: false
+        default: '95m'
 
 permissions:
   contents: write
 
 jobs:
-  copy-asset:
+  split-and-copy:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     
     steps:
       - name: Checkout repository
@@ -28,12 +32,10 @@ jobs:
           
           echo "جستجوی فایل APK در ریلیز ${TAG}..."
           
-          # دریافت اطلاعات ریلیز از API گیت‌هاب
           RELEASE_DATA=$(curl -s \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             "https://api.github.com/repos/${REPO}/releases/tags/${TAG}")
           
-          # جستجوی فایل APK در assets
           ASSET_URL=$(echo "$RELEASE_DATA" | jq -r '.assets[] | select(.name | endswith(".apk")) | .url')
           
           if [ -z "$ASSET_URL" ] || [ "$ASSET_URL" = "null" ]; then
@@ -41,103 +43,112 @@ jobs:
             exit 1
           fi
           
-          echo "✅ فایل پیدا شد"
           echo "asset_url=${ASSET_URL}" >> $GITHUB_OUTPUT
 
-      - name: Download and Copy APK to Root
-        id: download
+      - name: Download and Split APK
+        id: split
         run: |
           ASSET_URL="${{ steps.get_asset.outputs.asset_url }}"
+          PART_SIZE="${{ github.event.inputs.part_size }}"
           
-          echo "در حال دانلود فایل از API گیت‌هاب..."
+          echo "در حال دانلود فایل..."
           
-          # دانلود فایل
           curl -L \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/octet-stream" \
-            -o "CodeOnTheGo-latest.apk" \
+            -o "original.apk" \
             "$ASSET_URL"
           
-          # بررسی موفقیت دانلود
-          if [ ! -f "CodeOnTheGo-latest.apk" ]; then
-            echo "❌ دانلود ناموفق بود"
+          if [ ! -f "original.apk" ]; then
+            echo "❌ دانلود ناموفق"
             exit 1
           fi
           
-          FILE_SIZE=$(stat -c%s "CodeOnTheGo-latest.apk" 2>/dev/null || stat -f%z "CodeOnTheGo-latest.apk" 2>/dev/null)
-          if [ "$FILE_SIZE" -lt 1000000 ]; then
-            echo "❌ حجم فایل خیلی کم است: ${FILE_SIZE} بایت"
-            exit 1
-          fi
+          FILE_SIZE=$(stat -c%s "original.apk" 2>/dev/null || stat -f%z "original.apk" 2>/dev/null)
+          echo "حجم فایل اصلی: $(numfmt --to=iec $FILE_SIZE)"
           
-          VERSION="${{ github.event.inputs.tag_name }}"
-          cp "CodeOnTheGo-latest.apk" "CodeOnTheGo-${VERSION}.apk"
+          # ایجاد پوشه برای فایل‌های تقسیم شده
+          mkdir -p apk_parts
           
-          echo "✅ فایل با موفقیت در ریشه مخزن ذخیره شد"
-          echo "حجم فایل: $(du -h CodeOnTheGo-latest.apk | cut -f1)"
+          # تقسیم فایل با استفاده از split
+          echo "در حال تقسیم فایل به پارت‌های ${PART_SIZE}..."
+          split -b "$PART_SIZE" "original.apk" "apk_parts/CodeOnTheGo.part."
+          
+          # شمارش تعداد پارت‌ها
+          PART_COUNT=$(ls -1 apk_parts/ | wc -l)
+          echo "✅ فایل به ${PART_COUNT} پارت تقسیم شد"
+          
+          # ایجاد فایل راهنما برای اسمبل مجدد
+          cat > apk_parts/README.md << EOF
+# نحوه اسمبل مجدد فایل APK
 
-      - name: Commit and Push to Repository
+برای ساختن فایل APK اصلی از این پارت‌ها، دستور زیر را اجرا کنید:
+
+\`\`\`bash
+cat CodeOnTheGo.part.* > CodeOnTheGo.apk
+\`\`\`
+
+یا در ویندوز (PowerShell):
+\`\`\`powershell
+Get-Content CodeOnTheGo.part.* -AsByteStream | Set-Content CodeOnTheGo.apk -AsByteStream
+\`\`\`
+
+**اطلاعات فایل:**
+- حجم اصلی: $(numfmt --to=iec $FILE_SIZE)
+- تعداد پارت‌ها: ${PART_COUNT}
+- حجم هر پارت: ${PART_SIZE}
+- نسخه: ${{ github.event.inputs.tag_name }}
+EOF
+          
+          # ذخیره تعداد پارت‌ها برای مرحله بعد
+          echo "part_count=${PART_COUNT}" >> $GITHUB_OUTPUT
+
+      - name: Commit and Push Split Files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
+          # حذف فایل‌های قدیمی (اختیاری)
+          rm -f CodeOnTheGo.part.* 2>/dev/null || true
+          
+          # کپی فایل‌ها به ریشه مخزن
+          cp apk_parts/CodeOnTheGo.part.* .
+          cp apk_parts/README.md "APK_Assembly_Guide.md"
+          
           # افزودن فایل‌ها به git
-          git add CodeOnTheGo-latest.apk CodeOnTheGo-*.apk
+          git add CodeOnTheGo.part.* APK_Assembly_Guide.md
           
-          # بررسی تغییرات
           if git diff --cached --quiet; then
-            echo "⚠️ هیچ فایل جدیدی برای commit وجود ندارد"
+            echo "⚠️ هیچ تغییر جدیدی وجود ندارد"
           else
-            git commit -m "📦 کپی فایل APK از ریلیز ${{ github.event.inputs.tag_name }} به ریشه مخزن"
+            git commit -m "🔪 تقسیم APK نسخه ${{ github.event.inputs.tag_name }} به ${{ steps.split.outputs.part_count }} پارت"
             git push
-            echo "✅ فایل‌ها با موفقیت به ریشه مخزن اضافه شدند"
-          fi
-
-      - name: Update README with Download Link
-        run: |
-          REPO="${{ github.repository }}"
-          VERSION="${{ github.event.inputs.tag_name }}"
-          
-          # اگر فایل README وجود دارد، لینک دانلود را به آن اضافه کن
-          if [ -f "README.md" ]; then
-            # بررسی اینکه آیا لینک دانلود قبلاً در README هست یا نه
-            if ! grep -q "دانلود مستقیم" README.md; then
-              echo "" >> README.md
-              echo "## 📱 دانلود مستقیم APK" >> README.md
-              echo "" >> README.md
-              echo "[دانلود آخرین نسخه](${REPO}/blob/main/CodeOnTheGo-latest.apk?raw=true)" >> README.md
-              echo "" >> README.md
-              echo "**نسخه ${VERSION}**" >> README.md
-              
-              git add README.md
-              git commit -m "📝 اضافه کردن لینک دانلود APK به README"
-            fi
-            git push
-          else
-            echo "⚠️ فایل README.md پیدا نشد، لینک دانلود اضافه نشد"
+            echo "✅ فایل‌های تقسیم شده در مخزن ذخیره شدند"
           fi
 
       - name: Show Download Links
         run: |
           REPO="${{ github.repository }}"
-          VERSION="${{ github.event.inputs.tag_name }}"
+          PART_COUNT="${{ steps.split.outputs.part_count }}"
           
           echo ""
           echo "══════════════════════════════════════════════════════"
-          echo "✅ عملیات با موفقیت انجام شد"
+          echo "✅ فایل APK با موفقیت تقسیم و ذخیره شد"
           echo ""
-          echo "📁 فایل‌های APK در ریشه مخزن (کنار README) ذخیره شدند:"
+          echo "📁 فایل‌های ذخیره شده در ریشه مخزن:"
           echo ""
-          echo "📥 لینک دانلود مستقیم از طریق گیت‌هاب:"
-          echo "نسخه ${VERSION}:"
-          echo "https://github.com/${REPO}/blob/main/CodeOnTheGo-${VERSION}.apk?raw=true"
+          
+          for i in $(seq 1 $PART_COUNT); do
+            echo "پارت ${i}: https://github.com/${REPO}/blob/main/CodeOnTheGo.part.aa?raw=true"
+          done
+          
           echo ""
-          echo "آخرین نسخه:"
-          echo "https://github.com/${REPO}/blob/main/CodeOnTheGo-latest.apk?raw=true"
+          echo "📄 راهنمای اسمبل: https://github.com/${REPO}/blob/main/APK_Assembly_Guide.md"
           echo ""
-          echo "🌐 مشاهده فایل در مرورگر:"
-          echo "https://github.com/${REPO}/blob/main/CodeOnTheGo-latest.apk"
-          echo ""
-          echo "📄 لینک README:"
-          echo "https://github.com/${REPO}/blob/main/README.md"
           echo "══════════════════════════════════════════════════════"
+          echo ""
+          echo "🔧 دستور اسمبل در لینوکس/مک:"
+          echo "cat CodeOnTheGo.part.* > CodeOnTheGo.apk"
+          echo ""
+          echo "🔧 دستور اسمبل در ویندوز (PowerShell):"
+          echo "Get-Content CodeOnTheGo.part.* -AsByteStream | Set-Content CodeOnTheGo.apk -AsByteStream"
