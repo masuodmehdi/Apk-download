@@ -6,7 +6,7 @@ on:
       tag_name:
         description: 'نسخه (مثال: v26.16)'
         required: true
-        default: 'v26.16'
+        default: 'v26.18'
 
 permissions:
   contents: write
