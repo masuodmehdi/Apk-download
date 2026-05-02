@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repository to master branch
         uses: actions/checkout@v4
         with:
-          ref: master # Or change to 'main' if your default branch is main
+          ref: main # Or change to 'main' if your default branch is main
 
       - name: Download the specific version APK (26.18) from official source
         id: download
