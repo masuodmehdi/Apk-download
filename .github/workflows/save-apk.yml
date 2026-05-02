@@ -77,8 +77,3 @@ jobs:
           cat > ASSEMBLE_GUIDE.md << 'EOF'
 # راهنمای اسمبل فایل APK
 
-برای ساختن فایل APK اصلی، همه پارت‌ها را در یک پوشه دانلود کرده و دستور زیر را اجرا کنید:
-
-**در لینوکس/مک/Termux:**
-```bash
-cat CodeOnTheGo.part.* > CodeOnTheGo-v26.18.apk
