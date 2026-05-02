@@ -100,27 +100,3 @@ jobs:
         if: steps.split.outputs.SPLIT_NEEDED == 'true'
         run: |
           cat > ASSEMBLE_GUIDE.md << 'EOF'
-  # 🔧 How to Assemble the APK from Split Parts
-          
-  The APK file for version 26.18 was larger than 95MB, so it has been split into multiple parts for storage on GitHub.
-          
-  ## To reconstruct and install the APK:
-          
-  ### Option 1: Using Termux (Recommended for Android)
-  1. Install Termux from F-Droid or GitHub.
-  2. Run the following commands:
-          
-  ```bash
-  # Navigate to downloads folder
-  cd ~/storage/downloads
-          
-  # Download all parts (replace USERNAME and REPO with your actual GitHub info)
-  wget https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/CodeOnTheGo.part.aa
-  wget https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/CodeOnTheGo.part.ab
-  # (repeat for all parts)
-          
-  # Merge the parts
-  cat CodeOnTheGo.part.* > CodeOnTheGo_v26.18.apk
-          
-  # Install the APK
-  termux-open CodeOnTheGo_v26.18.apk
