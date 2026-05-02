@@ -74,6 +74,4 @@ jobs:
       - name: Create assembly guide (if split)
         if: steps.split.outputs.SPLIT_NEEDED == 'true'
         run: |
-          cat > ASSEMBLE_GUIDE.md << 'EOF'
-# راهنمای اسمبل فایل APK
-
+          
