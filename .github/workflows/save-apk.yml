@@ -1,4 +1,4 @@
-name: Download, Split, Clean, and Deploy Latest APK (v26.18)
+name: Download, Split, and Save APK v26.18
 
 on:
   workflow_dispatch:
@@ -7,71 +7,75 @@ permissions:
   contents: write
 
 jobs:
-  update-apk-v26-18:
+  save-apk:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
-
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: main
 
       - name: Clean old files
         run: |
           echo "🧹 پاک کردن فایل‌های قدیمی..."
-          rm -f CodeOnTheGo*.apk CodeOnTheGo.part.* ASSEMBLE_GUIDE.md app.apk 2>/dev/null || true
+          rm -f *.apk CodeOnTheGo.part.* 2>/dev/null || true
           echo "✅ پاکسازی انجام شد"
 
-      - name: Download version 26.18
-        id: download
+      - name: Download APK v26.18
         run: |
-          APK_URL="https://download.appdevforall.org/CodeOnTheGo-release26.18-armv8a.apk"
-          echo "📥 در حال دانلود از $APK_URL"
+          echo "📥 دانلود فایل..."
+          curl -L -o "app.apk" \
+            "https://download.appdevforall.org/CodeOnTheGo-release26.18-armv8a.apk"
           
-          curl --fail --location \
-               --connect-timeout 30 \
-               --max-time 180 \
-               --retry 3 \
-               --retry-delay 5 \
-               -o "app.apk" \
-               "$APK_URL"
+          FILE_SIZE=$(stat -c%s "app.apk")
+          echo "📊 حجم فایل: $((FILE_SIZE / 1024 / 1024)) مگابایت"
           
-          if [ ! -f "app.apk" ]; then
-            echo "❌ دانلود ناموفق"
-            exit 1
-          fi
-          
-          FILE_SIZE=$(stat -c%s "app.apk" 2>/dev/null || stat -f%z "app.apk" 2>/dev/null)
-          echo "📊 حجم فایل: $FILE_SIZE بایت"
-          
-          if [ "$FILE_SIZE" -lt 1000000 ]; then
+          if [ $FILE_SIZE -lt 1000000 ]; then
             echo "❌ حجم فایل خیلی کم است"
             exit 1
           fi
-          
           echo "✅ دانلود موفق"
-          echo "FILE_SIZE=$FILE_SIZE" >> $GITHUB_OUTPUT
 
       - name: Split APK (if needed)
-        id: split
         run: |
-          MAX_SIZE_BYTES=99614720
           FILE_SIZE=$(stat -c%s "app.apk")
+          MAX_SIZE=$((95 * 1024 * 1024))
           
-          if [ $FILE_SIZE -le $MAX_SIZE_BYTES ]; then
-            echo "فایل کوچک است (کمتر از 95MB)، نیازی به تقسیم نیست"
+          if [ $FILE_SIZE -le $MAX_SIZE ]; then
+            echo "📦 فایل کوچک است، کپی می‌شود..."
             cp app.apk "CodeOnTheGo-v26.18.apk"
-            echo "SPLIT_NEEDED=false" >> $GITHUB_OUTPUT
           else
-            echo "فایل بزرگ است، در حال تقسیم به پارت‌های 95MB..."
+            echo "🔪 فایل بزرگ است، تقسیم می‌شود..."
             split -b 95m app.apk "CodeOnTheGo.part."
-            PART_COUNT=$(ls -1 CodeOnTheGo.part.* 2>/dev/null | wc -l)
-            echo "✅ به $PART_COUNT پارت تقسیم شد"
-            echo "SPLIT_NEEDED=true" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create assembly guide (if split)
-        if: steps.split.outputs.SPLIT_NEEDED == 'true'
+      - name: Commit and Push to Repository
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           
+          git add CodeOnTheGo-v26.18.apk 2>/dev/null || true
+          git add CodeOnTheGo.part.* 2>/dev/null || true
+          
+          if git status --porcelain | grep -q .; then
+            git commit -m "📦 اضافه کردن APK نسخه 26.18"
+            git push origin HEAD:main
+            echo "✅ آپلود انجام شد"
+          else
+            echo "⚠️ هیچ فایل جدیدی برای آپلود وجود ندارد"
+            exit 1
+          fi
+
+      - name: Show links
+        run: |
+          echo "════════════════════════════════════════"
+          echo "✅ عملیات انجام شد"
+          echo ""
+          echo "📥 لینک دانلود مستقیم:"
+          if [ -f "CodeOnTheGo-v26.18.apk" ]; then
+            echo "https://raw.githubusercontent.com/${{ github.repository }}/main/CodeOnTheGo-v26.18.apk"
+          else
+            for part in CodeOnTheGo.part.*; do
+              echo "https://raw.githubusercontent.com/${{ github.repository }}/main/$part"
+            done
+          fi
+          echo "════════════════════════════════════════"
