@@ -20,16 +20,6 @@ jobs:
         with:
           ref: master # Or change to 'main' if your default branch is main
 
-      - name: Clean previous split files and APKs from root
-        run: |
-          echo "🧹 Cleaning up old APK and part files from the root directory..."
-          # Remove any file matching the patterns from the root
-          rm -f CodeOnTheGo*.apk
-          rm -f CodeOnTheGo.part.*
-          rm -f app.apk
-          rm -f original.apk
-          echo "✅ Cleanup complete."
-
       - name: Download the specific version APK (26.18) from official source
         id: download
         run: |
