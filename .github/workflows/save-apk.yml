@@ -1,89 +1,126 @@
-name: Split and Copy APK
+name: Download, Split, Clean, and Deploy Latest APK (v26.18)
 
 on:
   workflow_dispatch:
-    inputs:
-      tag_name:
-        description: 'نسخه (مثال: v26.16)'
-        required: true
-        default: 'v26.18'
+    # No inputs needed, it's hardcoded for version 26.18
 
 permissions:
   contents: write
 
 jobs:
-  split-apk:
+  update-apk-v26-18:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    # Using master branch as the default branch for commit
+    # If your default branch is 'main', change the branch name below in git push command
 
-      - name: Download APK from Release
+    steps:
+      - name: Checkout repository to master branch
+        uses: actions/checkout@v4
+        with:
+          ref: master # Or change to 'main' if your default branch is main
+
+      - name: Clean previous split files and APKs from root
+        run: |
+          echo "🧹 Cleaning up old APK and part files from the root directory..."
+          # Remove any file matching the patterns from the root
+          rm -f CodeOnTheGo*.apk
+          rm -f CodeOnTheGo.part.*
+          rm -f app.apk
+          rm -f original.apk
+          echo "✅ Cleanup complete."
+
+      - name: Download the specific version APK (26.18) from official source
         id: download
         run: |
-          REPO="${{ github.repository }}"
-          TAG="${{ github.event.inputs.tag_name }}"
+          # Hardcoded URL for version 26.18 as requested
+          APK_URL="https://download.appdevforall.org/CodeOnTheGo-release26.18-armv8a.apk"
+          echo "📥 Downloading version 26.18 from $APK_URL"
           
-          echo "دریافت لینک دانلود..."
-          DOWNLOAD_URL=$(curl -s \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${REPO}/releases/tags/${TAG}" \
-            | grep -oP '"browser_download_url":\s*"\K[^"]+(?=")' | head -1)
+          # Download with retry mechanism
+          curl --fail --location \
+               --connect-timeout 30 \
+               --max-time 180 \
+               --retry 3 \
+               --retry-delay 5 \
+               --verbose \
+               -o "app.apk" \
+               "$APK_URL"
           
-          if [ -z "$DOWNLOAD_URL" ]; then
-            echo "❌ لینک دانلود پیدا نشد"
+          # Check if download was successful
+          if [ ! -f "app.apk" ]; then
+            echo "❌ Download failed: File not found."
             exit 1
           fi
           
-          echo "شروع دانلود..."
-          curl -L -o "app.apk" "$DOWNLOAD_URL"
+          # Check file size (must be larger than 1MB)
+          FILE_SIZE=$(stat -c%s "app.apk" 2>/dev/null || stat -f%z "app.apk" 2>/dev/null)
+          echo "📊 Downloaded file size: $FILE_SIZE bytes"
           
-          FILE_SIZE=$(stat -c%s "app.apk")
-          echo "حجم: $FILE_SIZE بایت"
-          
-          if [ $FILE_SIZE -lt 1000000 ]; then
-            echo "❌ حجم فایل خیلی کم است"
+          if [ "$FILE_SIZE" -lt 1000000 ]; then
+            echo "❌ Download failed: File size is less than 1MB. The file might be corrupted or the URL is invalid."
             exit 1
           fi
+          
+          echo "✅ Successfully downloaded CodeOnTheGo-release26.18-armv8a.apk"
+          echo "FILE_SIZE=$FILE_SIZE" >> $GITHUB_OUTPUT
 
-      - name: Split into 95MB parts
+      - name: Split APK into 95MB Parts
         run: |
-          # حداکثر 95 مگابایت برای هر فایل
-          MAX_SIZE=99614720  # 95 * 1024 * 1024
+          MAX_SIZE_BYTES=99614720 # 95 MB in bytes
           FILE_SIZE=$(stat -c%s "app.apk")
           
-          if [ $FILE_SIZE -le $MAX_SIZE ]; then
-            echo "فایل کوچک است، نیازی به تقسیم نیست"
-            cp app.apk "CodeOnTheGo-${{ github.event.inputs.tag_name }}.apk"
-            echo "split_needed=false" >> $GITHUB_OUTPUT
+          echo "🔪 Checking if splitting is needed..."
+          if [ $FILE_SIZE -le $MAX_SIZE_BYTES ]; then
+            echo "File is $FILE_SIZE bytes which is less than or equal to 95MB. No splitting required."
+            cp app.apk "CodeOnTheGo-v26.18.apk"
+            echo "SPLIT_NEEDED=false" >> $GITHUB_OUTPUT
           else
-            echo "تقسیم فایل به چند پارت..."
+            echo "File is $FILE_SIZE bytes which is LARGER than 95MB. Splitting into parts..."
+            # Split the file
             split -b 95m app.apk "CodeOnTheGo.part."
-            echo "split_needed=true" >> $GITHUB_OUTPUT
-            echo "پارت‌ها ساخته شدند"
+            
+            # List the generated parts for verification
+            echo "Generated parts:"
+            ls -lh CodeOnTheGo.part.*
+            
+            # Verify that parts were created
+            PART_COUNT=$(ls -1 CodeOnTheGo.part.* 2>/dev/null | wc -l)
+            if [ "$PART_COUNT" -eq 0 ]; then
+              echo "❌ Splitting failed: No part files created."
+              exit 1
+            fi
+            
+            echo "✅ File split into $PART_COUNT parts (95MB each)."
+            echo "SPLIT_NEEDED=true" >> $GITHUB_OUTPUT
+            echo "PART_COUNT=$PART_COUNT" >> $GITHUB_OUTPUT
           fi
 
-      - name: Commit files
+      - name: Create README Guide for Users (if split was needed)
+        if: steps.split.outputs.SPLIT_NEEDED == 'true'
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
+          cat > ASSEMBLE_GUIDE.md << 'EOF'
+  # 🔧 How to Assemble the APK from Split Parts
           
-          git add CodeOnTheGo* 2>/dev/null || true
+  The APK file for version 26.18 was larger than 95MB, so it has been split into multiple parts for storage on GitHub.
           
-          if git diff --cached --quiet; then
-            echo "تغییری وجود ندارد"
-          else
-            git commit -m "Add APK files from ${{ github.event.inputs.tag_name }}"
-            git push
-            echo "✅ فایل‌ها ذخیره شدند"
-          fi
-
-      - name: Show links
-        run: |
-          echo "════════════════════════════════════"
-          echo "✅ عملیات انجام شد"
-          echo "لینک فایل‌ها:"
-          echo "https://github.com/${{ github.repository }}/blob/main/"
-          echo "════════════════════════════════════"
+  ## To reconstruct and install the APK:
+          
+  ### Option 1: Using Termux (Recommended for Android)
+  1. Install Termux from F-Droid or GitHub.
+  2. Run the following commands:
+          
+  ```bash
+  # Navigate to downloads folder
+  cd ~/storage/downloads
+          
+  # Download all parts (replace USERNAME and REPO with your actual GitHub info)
+  wget https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/CodeOnTheGo.part.aa
+  wget https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/CodeOnTheGo.part.ab
+  # (repeat for all parts)
+          
+  # Merge the parts
+  cat CodeOnTheGo.part.* > CodeOnTheGo_v26.18.apk
+          
+  # Install the APK
+  termux-open CodeOnTheGo_v26.18.apk
