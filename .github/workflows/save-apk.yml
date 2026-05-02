@@ -2,7 +2,6 @@ name: Download, Split, Clean, and Deploy Latest APK (v26.18)
 
 on:
   workflow_dispatch:
-    # No inputs needed, it's hardcoded for version 26.18
 
 permissions:
   contents: write
@@ -11,82 +10,75 @@ jobs:
   update-apk-v26-18:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    # Using master branch as the default branch for commit
-    # If your default branch is 'main', change the branch name below in git push command
 
     steps:
-      - name: Checkout repository to master branch
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: main # Or change to 'main' if your default branch is main
+          ref: main
 
-      - name: Download the specific version APK (26.18) from official source
+      - name: Clean old files
+        run: |
+          echo "🧹 پاک کردن فایل‌های قدیمی..."
+          rm -f CodeOnTheGo*.apk CodeOnTheGo.part.* ASSEMBLE_GUIDE.md app.apk 2>/dev/null || true
+          echo "✅ پاکسازی انجام شد"
+
+      - name: Download version 26.18
         id: download
         run: |
-          # Hardcoded URL for version 26.18 as requested
           APK_URL="https://download.appdevforall.org/CodeOnTheGo-release26.18-armv8a.apk"
-          echo "📥 Downloading version 26.18 from $APK_URL"
+          echo "📥 در حال دانلود از $APK_URL"
           
-          # Download with retry mechanism
           curl --fail --location \
                --connect-timeout 30 \
                --max-time 180 \
                --retry 3 \
                --retry-delay 5 \
-               --verbose \
                -o "app.apk" \
                "$APK_URL"
           
-          # Check if download was successful
           if [ ! -f "app.apk" ]; then
-            echo "❌ Download failed: File not found."
+            echo "❌ دانلود ناموفق"
             exit 1
           fi
           
-          # Check file size (must be larger than 1MB)
           FILE_SIZE=$(stat -c%s "app.apk" 2>/dev/null || stat -f%z "app.apk" 2>/dev/null)
-          echo "📊 Downloaded file size: $FILE_SIZE bytes"
+          echo "📊 حجم فایل: $FILE_SIZE بایت"
           
           if [ "$FILE_SIZE" -lt 1000000 ]; then
-            echo "❌ Download failed: File size is less than 1MB. The file might be corrupted or the URL is invalid."
+            echo "❌ حجم فایل خیلی کم است"
             exit 1
           fi
           
-          echo "✅ Successfully downloaded CodeOnTheGo-release26.18-armv8a.apk"
+          echo "✅ دانلود موفق"
           echo "FILE_SIZE=$FILE_SIZE" >> $GITHUB_OUTPUT
 
-      - name: Split APK into 95MB Parts
+      - name: Split APK (if needed)
+        id: split
         run: |
-          MAX_SIZE_BYTES=99614720 # 95 MB in bytes
+          MAX_SIZE_BYTES=99614720
           FILE_SIZE=$(stat -c%s "app.apk")
           
-          echo "🔪 Checking if splitting is needed..."
           if [ $FILE_SIZE -le $MAX_SIZE_BYTES ]; then
-            echo "File is $FILE_SIZE bytes which is less than or equal to 95MB. No splitting required."
+            echo "فایل کوچک است (کمتر از 95MB)، نیازی به تقسیم نیست"
             cp app.apk "CodeOnTheGo-v26.18.apk"
             echo "SPLIT_NEEDED=false" >> $GITHUB_OUTPUT
           else
-            echo "File is $FILE_SIZE bytes which is LARGER than 95MB. Splitting into parts..."
-            # Split the file
+            echo "فایل بزرگ است، در حال تقسیم به پارت‌های 95MB..."
             split -b 95m app.apk "CodeOnTheGo.part."
-            
-            # List the generated parts for verification
-            echo "Generated parts:"
-            ls -lh CodeOnTheGo.part.*
-            
-            # Verify that parts were created
             PART_COUNT=$(ls -1 CodeOnTheGo.part.* 2>/dev/null | wc -l)
-            if [ "$PART_COUNT" -eq 0 ]; then
-              echo "❌ Splitting failed: No part files created."
-              exit 1
-            fi
-            
-            echo "✅ File split into $PART_COUNT parts (95MB each)."
+            echo "✅ به $PART_COUNT پارت تقسیم شد"
             echo "SPLIT_NEEDED=true" >> $GITHUB_OUTPUT
-            echo "PART_COUNT=$PART_COUNT" >> $GITHUB_OUTPUT
           fi
 
-      - name: Create README Guide for Users (if split was needed)
+      - name: Create assembly guide (if split)
         if: steps.split.outputs.SPLIT_NEEDED == 'true'
         run: |
           cat > ASSEMBLE_GUIDE.md << 'EOF'
+# راهنمای اسمبل فایل APK
+
+برای ساختن فایل APK اصلی، همه پارت‌ها را در یک پوشه دانلود کرده و دستور زیر را اجرا کنید:
+
+**در لینوکس/مک/Termux:**
+```bash
+cat CodeOnTheGo.part.* > CodeOnTheGo-v26.18.apk
