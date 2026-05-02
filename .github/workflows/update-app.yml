@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: 'نسخه مورد نظر (مثال: v26.16)'
+        description: 'نسخه مورد نظر (مثال: v26.18)'
         required: true
-        default: 'v26.16'
+        default: 'v26.18'
 
 permissions:
   contents: write
