@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 
 def fetch_and_save():
-    url = "https://t.me/s/Begoo_VPN_Gp"
+    url = "https://t.me/s/Begoo_VPN"
     headers = {'User-Agent': 'Mozilla/5.0'}
     
     try:
