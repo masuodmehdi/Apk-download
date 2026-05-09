@@ -1,0 +1,29 @@
+name: Download APK File
+
+on:
+  workflow_dispatch:  # با اجرای دستی فعال میشه
+
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Download APK from release
+        run: |
+          curl -L -o SlipNet-v2.5.3-full-release-arm64-v8a.apk \
+          "https://github.com/anonvector/SlipNet/releases/download/v2.5.3/SlipNet-v2.5.3-full-release-arm64-v8a.apk"
+      
+      - name: Verify download
+        run: |
+          ls -lh SlipNet*.apk
+      
+      - name: Commit and push (optional)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add SlipNet*.apk
+          git commit -m "Download APK v2.5.3" || echo "No changes to commit"
+          git push
