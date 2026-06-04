@@ -1,9 +1,5 @@
-📡 fetched at 2026-06-04 21:09:19
+📡 fetched at 2026-06-04 22:52:26
 ==================================================
-
-https://t.me/socks?server=92.242.214.138&port=18438&user=%40Begoo_VPN&pass=%40Begoo_VPN
-
----
 
 فروش به صورت محدود باز شد✅اول متن راهنما داخل ربات رو کامل بخونید بعد خرید کنید در غیر این صورت مسئولیت هراتفاقی به عهده خودتان میباشد❤️روش های پرداخت به صورت زیر میباشد  ریالی🤑تون🪙ترون🪙@Begoo_VPN_Bot   تایید تراکنش و تحویل سرویس به صورت اتومات…
 
@@ -82,3 +78,7 @@ https://t.me/socks?server=185.232.155.96&port=26465&user=%40Begoo_VPN&pass=%40Be
 ---
 
 تست سرعت🔴Express VPN🔴
+
+---
+
+vless://1d4165bd-e5c8-4eeb-9594-da5c28e92d41@162.245.81.42:45121?path=%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN&security=none&encryption=none&host=nodejs.org&type=ws#%40Begoo_VPN%20%C2%B9%E2%81%B7%E2%81%B0
