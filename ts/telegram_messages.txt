@@ -1,4 +1,4 @@
-📡 fetched at 2026-06-05 19:15:29
+📡 fetched at 2026-06-05 21:06:54
 ==================================================
 
 https://t.me/socks?server=185.232.155.96&port=26465&user=%40Begoo_VPN&pass=%40Begoo_VPN
@@ -77,4 +77,4 @@ vless://0c61d46d-4c4d-421b-b0fb-d211415da368@52.14.47.44:443?security=none&encry
 
 ---
 
-لیست اکانت هایی که قراره داخل ربات موجود شنSpotify🟢Trending View🔵🔸
+لیست اکانت هایی که قراره داخل ربات موجود شنSpotify🟢Trading View🔵🔸
