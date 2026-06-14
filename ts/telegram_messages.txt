@@ -1,9 +1,5 @@
-📡 fetched at 2026-06-14 20:45:31
+📡 fetched at 2026-06-14 22:04:23
 ==================================================
-
-https://t.me/socks?server=46.225.52.58&port=31306&user=%40Begoo_VPN&pass=%40Begoo_VPN
-
----
 
 دانلود نکنید تا وصل بمونید✅پسورد@Begoo_VPN
 
@@ -74,3 +70,7 @@ vless://331c4777-2c36-42ab-87af-f456efbe957c@94.182.107.242:38800?security=none&
 ---
 
 vless://8440c9e5-3a24-49cd-8fdd-f140dcb1b8c7@37.1.212.241:5262?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B9%E2%81%B7%E2%81%B8
+
+---
+
+😂😂
