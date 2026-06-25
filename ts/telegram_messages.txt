@@ -1,9 +1,5 @@
-📡 fetched at 2026-06-25 20:33:22
+📡 fetched at 2026-06-25 22:17:21
 ==================================================
-
-vless://2c36bf33-1ec0-45e8-84af-84eeccd56ca5@45.152.67.34:47488?security=none&encryption=none&headerType=none&type=tcp#Begoo_VPN%20%C2%B9%E2%81%B7%C2%B2
-
----
 
 vless://67c1c2b6-29fd-4336-9b72-30c5a30e2891@185.233.131.56:3000?path=%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN&security=none&encryption=none&type=ws#%40Begoo_VPN%20%C2%B9%E2%81%B7%E2%81%B5
 
@@ -74,3 +70,7 @@ vless://142360de-43b0-4f8f-8a8e-f6c327ab91fe@2.26.117.103:443?security=reality&e
 ---
 
 vless://a7f24c6b-4d57-4d68-b283-4d9afbd23397@89.34.230.45:18808?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B9%E2%81%B9%C2%B2
+
+---
+
+🔴ExpressVPN🔴اکانت‌های ExpressVPN رو می‌تونید مستقیم از داخل ربات دریافت کنید✅💳پرداخت به دو صورت:▫️ریالی▫️ارزی (TRON / TON)@Begoo_VPN_Bot📦خرید عمده و همکاری:برای دریافت قیمت به اکانت ادمین پیام بدید.@Begoo_VPN_Admin
