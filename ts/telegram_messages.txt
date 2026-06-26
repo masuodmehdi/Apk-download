@@ -1,9 +1,5 @@
-📡 fetched at 2026-06-26 17:14:47
+📡 fetched at 2026-06-26 19:16:05
 ==================================================
-
-vless://67c1c2b6-29fd-4336-9b72-30c5a30e2891@185.233.131.56:3000?path=%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN&security=none&encryption=none&type=ws#%40Begoo_VPN%20%C2%B9%E2%81%B7%E2%81%B5
-
----
 
 vless://331c4777-2c36-42ab-87af-f456efbe957c@94.182.107.242:38800?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B9%E2%81%B7%E2%81%B7
 
@@ -74,3 +70,11 @@ vless://a7f24c6b-4d57-4d68-b283-4d9afbd23397@89.34.230.45:18808?security=none&en
 ---
 
 🔴ExpressVPN🔴اکانت‌های ExpressVPN رو می‌تونید مستقیم از داخل ربات دریافت کنید✅💳پرداخت به دو صورت:▫️ریالی▫️ارزی (TRON / TON)@Begoo_VPN_Bot📦خرید عمده و همکاری:برای دریافت قیمت به اکانت ادمین پیام بدید.@Begoo_VPN_Admin
+
+---
+
+vless://538d4749-33ba-435f-8fbb-57d7f22f996b@176.34.140.103:31660?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B9%E2%81%B9%C2%B3
+
+---
+
+vless://7e6a38f4-7150-4eff-ae68-579852357ddb@13.40.188.81:443?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B9%E2%81%B9%E2%81%B4
