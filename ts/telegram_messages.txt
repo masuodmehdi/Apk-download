@@ -1,4 +1,4 @@
-📡 fetched at 2026-06-26 02:41:33
+📡 fetched at 2026-06-26 06:48:11
 ==================================================
 
 vless://67c1c2b6-29fd-4336-9b72-30c5a30e2891@185.233.131.56:3000?path=%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN&security=none&encryption=none&type=ws#%40Begoo_VPN%20%C2%B9%E2%81%B7%E2%81%B5
