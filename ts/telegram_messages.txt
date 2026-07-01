@@ -1,9 +1,5 @@
-📡 fetched at 2026-07-01 18:22:25
+📡 fetched at 2026-07-01 20:21:48
 ==================================================
-
-vless://2c745da3-f69f-4268-810e-389e935412e9@167.104.55.25:35401?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B9%E2%81%B8%E2%81%B8
-
----
 
 vmess://eyJhZGQiOiIxNzguNjIuMTE4LjIwNSIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiJlMTAxZGQzMy0yMzZmLTRmZGQtYWU1OS0wN2IxM2U4MzZjMjIiLCJpbnNlY3VyZSI6IjEiLCJuZXQiOiJ0Y3AiLCJwYXRoIjoiL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTiIsInBvcnQiOiIyOTU3NCIsInBzIjoiQEJlZ29vX1ZQTiDCueKBuOKBuSIsInNjeSI6ImF1dG8iLCJzbmkiOiIiLCJ0bHMiOiIiLCJ0eXBlIjoibm9uZSIsInYiOiIyIn0=
 
@@ -78,3 +74,7 @@ vless://c1f37260-7d28-4370-9e67-33d9bb17f5f6@199.91.220.99:36449?security=none&e
 ---
 
 🔴ExpressVPN🔴اکانت‌های ExpressVPN رو می‌تونید مستقیم از داخل ربات دریافت کنید✅💳پرداخت به دو صورت:▫️ریالی▫️ارزی (TRON / TON)@Begoo_VPN_Botتوضیحات:📌اکانت‌ها از پرایوت‌ترین خام‌ها تهیه شدن و احتمال بن شدنشون خیلی کمه؛ اما به دلیل کرکی بودن اکانت‌ها، هیچ‌گونه تضمین قطعی بن وجود نداره.🛠با این حال، در صورت بروز هرگونه مشکل برای اکانت، یک اکانت جایگزین دریافت می‌کنید.🛡سرویس 24 ماهه شامل 1 سال تضمین می‌باشد.📦خرید عمده و همکاری: برای دریافت قیمت به اکانت ادمین پیام بدید.@Begoo_VPN_Admin
+
+---
+
+vless://0828a0bc-8acf-422c-9fac-8ad885a0dbaf@176.119.141.136:8443?security=reality&encryption=none&pbk=Zfr2SDTLuLNtbRR4hGX0oE3z1wbK3XvwzrvUfPQNugE&headerType=none&fp=chrome&spx=%2F&type=tcp&flow=xtls-rprx-vision&sni=www.nvidia.com&sid=205f8d#%40Begoo_VPN%20%C2%B2%E2%81%B0%E2%81%B5
