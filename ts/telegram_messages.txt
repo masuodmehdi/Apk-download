@@ -1,9 +1,5 @@
-📡 fetched at 2026-07-04 20:28:19
+📡 fetched at 2026-07-04 21:28:10
 ==================================================
-
-vless://a0addfd6-969a-43ea-a3ea-c2392b2e06a8@157.22.183.74:19984?path=%2F&security=none&encryption=none&host=%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN&type=ws#%40Begoo_VPN%20%C2%B9%E2%81%B9%E2%81%B0
-
----
 
 vless://142360de-43b0-4f8f-8a8e-f6c327ab91fe@2.26.117.103:443?security=reality&encryption=none&pbk=2zWWH9Jl7-OsBgldT024APUnuSuzCS8-5V9VFVfM2i0&headerType=none&fp=chrome&spx=%2F&type=tcp&sni=ern.bartemeconnect.tech&sid=8eb36ac02bd4#%40Begoo_VPN%20%C2%B9%E2%81%B9%C2%B9
 
@@ -78,3 +74,7 @@ vless://0828a0bc-8acf-422c-9fac-8ad885a0dbaf@176.119.141.136:8443?security=reali
 ---
 
 💠کالاف پلیرا💠چنل دوم بگو@Begoo_CODMفیلمای اکانتا@Begoo_CODM_Videoربات@Begoo_CODM_Bot
+
+---
+
+vless://bd449f7a-95aa-4920-9af0-cd6b5d4cb5f1@176.222.54.252:26690?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B0%E2%81%B6
