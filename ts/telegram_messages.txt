@@ -1,4 +1,4 @@
-📡 fetched at 2026-07-06 08:56:04
+📡 fetched at 2026-07-06 12:41:07
 ==================================================
 
 vless://142360de-43b0-4f8f-8a8e-f6c327ab91fe@2.26.117.103:443?security=reality&encryption=none&pbk=2zWWH9Jl7-OsBgldT024APUnuSuzCS8-5V9VFVfM2i0&headerType=none&fp=chrome&spx=%2F&type=tcp&sni=ern.bartemeconnect.tech&sid=8eb36ac02bd4#%40Begoo_VPN%20%C2%B9%E2%81%B9%C2%B9
