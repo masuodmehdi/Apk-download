@@ -1,9 +1,5 @@
-📡 fetched at 2026-07-08 17:57:49
+📡 fetched at 2026-07-08 19:24:02
 ==================================================
-
-vless://7e6a38f4-7150-4eff-ae68-579852357ddb@13.40.188.81:443?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B9%E2%81%B9%E2%81%B4
-
----
 
 vless://c87950b3-f132-450a-bec6-e9e91fc9d8bc@193.23.219.140:56453?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B9%E2%81%B9%E2%81%B5
 
@@ -78,3 +74,7 @@ vless://33c23181-92e3-4f7c-8c66-f62d1ea6c55b@185.28.172.123:443?security=none&en
 ---
 
 پسورد@Begoo_VPN
+
+---
+
+لیست بن و سکوت خالی شد داخل گروه عضو شیدتبلیغ ممنوع🚫@Begoo_VPN_Gp
