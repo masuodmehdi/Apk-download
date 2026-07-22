@@ -1,17 +1,5 @@
-📡 fetched at 2026-07-22 20:35:58
+📡 fetched at 2026-07-22 22:00:01
 ==================================================
-
-vless://33c23181-92e3-4f7c-8c66-f62d1ea6c55b@185.28.172.123:443?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B0%E2%81%B7
-
----
-
-پسورد@Begoo_VPN
-
----
-
-پسورد@Begoo_VPN
-
----
 
 🔴ExpressVPN🔴اکانت‌های ExpressVPN رو می‌تونید مستقیم از داخل ربات دریافت کنید✅💳پرداخت به دو صورت:▫️ریالی▫️ارزی (TRON / TON)@Begoo_VPN_Botتوضیحات:📌اکانت‌ها از پرایوت‌ترین خام‌ها تهیه شدن و احتمال بن شدنشون خیلی کمه؛ اما به دلیل کرکی بودن اکانت‌ها، هیچ‌گونه تضمین قطعی بن وجود نداره.🛠با این حال، در صورت بروز هرگونه مشکل برای اکانت، یک اکانت جایگزین دریافت می‌کنید.🛡سرویس 24 ماهه شامل 1 سال تضمین می‌باشد.📦خرید عمده و همکاری: برای دریافت قیمت به اکانت ادمین پیام بدید.@Begoo_VPN_Admin
 
@@ -82,3 +70,15 @@ vless://f0169b08-43fd-4dc3-8195-18f6ad2fe39d@120.227.1.43:12528?security=none&en
 ---
 
 vless://da97d2d7-d255-4efd-8398-7101d698768e@195.133.18.161:30153?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%C2%B2%E2%81%B4
+
+---
+
+vmess://eyJhZGQiOiI0My4xNzMuNzQuMjQxIiwiYWlkIjoiMCIsImFscG4iOiIiLCJmcCI6IiIsImhvc3QiOiIiLCJpZCI6ImJkN2UwYzQwLTc5YzctNGRiMS1iYTI3LTQzODk0ZDU5YTRhMSIsImluc2VjdXJlIjoiMSIsIm5ldCI6InRjcCIsInBhdGgiOiIvQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOIiwicG9ydCI6IjEwMDg2IiwicHMiOiJAQmVnb29fVlBOIMKywrLigbQiLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6Im5vbmUiLCJ2IjoiMiJ9
+
+---
+
+vless://cbc1b9e7-c393-4053-a338-6ed714daf4eb@59.152.127.76:50863?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%C2%B2%E2%81%B5
+
+---
+
+vless://5eecb34f-c905-4c77-b7fb-d830b451cd11@141.133.172.222:20342?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%C2%B2%E2%81%B6
