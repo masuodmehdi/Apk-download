@@ -1,4 +1,4 @@
-📡 fetched at 2026-07-25 09:39:46
+📡 fetched at 2026-07-25 11:03:51
 ==================================================
 
 vless://76ca86e8-6370-45cc-9ad3-04f3bd223b0a@67.230.163.132:11835?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%C2%B9%C2%B9
