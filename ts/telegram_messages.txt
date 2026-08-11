@@ -1,4 +1,4 @@
-📡 fetched at 2026-08-11 10:25:28
+📡 fetched at 2026-08-11 11:12:30
 ==================================================
 
 vless://5aab0d40-c509-4560-b048-ade921fdfb6a@70.39.178.231:46197?security=reality&encryption=none&pbk=npJEB6VpYJ9iYTZ-z0IL06Xs7PEz0N3fZU_IRwftQ00&headerType=none&fp=chrome&spx=%2F2Ffdded5f9698d939&type=tcp&sni=updates.cdn-apple.com&sid=f24c17bb7fc284#%40Begoo_VPN%20%C2%B2%C2%B3%E2%81%B9
