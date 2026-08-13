@@ -1,4 +1,4 @@
-📡 fetched at 2026-08-13 09:39:11
+📡 fetched at 2026-08-13 10:56:03
 ==================================================
 
 vless://0370b162-baff-4757-86cc-cce4bf07f6f1@44.245.126.247:443?security=reality&encryption=none&pbk=lYcMPEgf6ePmF_d8RXR5fsVorycW37v_ECl-fz_H6w4&headerType=none&fp=random&spx=%2Ffdded5f9698d939&type=tcp&sni=www.cloudflare.com&sid=cfe08c23a85f24#%40Begoo_VPN%20%C2%B2%E2%81%B5%E2%81%B0
