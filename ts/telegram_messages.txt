@@ -1,17 +1,5 @@
-📡 fetched at 2026-08-26 12:36:39
+📡 fetched at 2026-08-26 13:49:45
 ==================================================
-
-ss://MjAyMi1ibGFrZTMtYWVzLTI1Ni1nY206bWtLZnhuZENaOWMzWUlrQUFtQU5ydGZJL21sR0p3d1Y5L0dkVlRZZ1czTT06SmF6eGlZYzNNYzV0TG4vVGUzVDU5VzZadzRaL0JQdWVwUTBWbFZEL2NaOD0@193.124.203.144:443#%40Begoo_VPN%20%C2%B2%E2%81%B6%E2%81%B5
-
----
-
-vless://d6c81f6d-24a8-46d9-a3bf-c38d51fc5fe5@171.97.18.114:8443?security=reality&encryption=none&pbk=sDH4MlZFHXJB5VR_mfuFNBrQHtptpNK-qj3sot7b1zU&headerType=none&fp=chrome&spx=%2F&type=tcp&sni=www.apple.com&sid=16887c51#%40Begoo_VPN%20%C2%B2%E2%81%B6%E2%81%B6
-
----
-
-vmess://eyJhZGQiOiIxNzguODMuNDUuMjkiLCJhaWQiOiIwIiwiYWxwbiI6IiIsImZwIjoiIiwiaG9zdCI6IiIsImlkIjoiNDg0MjIzMDAtNDU4Zi00ZGJiLWIwZjUtOTZmNDU0NTBhYjlmIiwiaW5zZWN1cmUiOiIxIiwibmV0IjoidGNwIiwicGF0aCI6Ii9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4iLCJwb3J0IjoiMzg5OTgiLCJwcyI6IkBCZWdvb19WUE4gwrLigbbigbciLCJzY3kiOiJhdXRvIiwic25pIjoiIiwidGxzIjoiIiwidHlwZSI6Im5vbmUiLCJ2IjoiMiJ9
-
----
 
 vless://d8523317-503e-43ad-b2c3-e5f77d725848@31.76.46.138:20422?security=reality&encryption=none&pbk=ZUQTvwYk_hDqSrw36uc18MkeEIXIGZZGsf5XWVwdqAQ&headerType=none&fp=random&spx=%2F&type=tcp&sni=yahoo.com&sid=90#%40Begoo_VPN%20%C2%B2%E2%81%B6%E2%81%B8
 
@@ -78,3 +66,19 @@ vless://b19f6b90-52f0-4846-a96f-b67acefadb04@66.33.22.226:50212?mode=stream-up&p
 ---
 
 vless://cd74983f-12f5-4836-aae5-17fbc136f888@153.56.134.149:37217?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B8%E2%81%B4
+
+---
+
+vmess://eyJhZGQiOiJhc2lhLnNlcnZvY2Vhbi5pciIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiJjYTk2NDBhMy1iMjFhLTQwNzMtOTY0Yi04MzE4ODA0OGRkMjIiLCJpbnNlY3VyZSI6IjEiLCJuZXQiOiJ0Y3AiLCJwYXRoIjoiL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTiIsInBvcnQiOiIxMDIwIiwicHMiOiJAQmVnb29fVlBOIMKy4oG44oG1Iiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIifQ==
+
+---
+
+در مدت قطعی اینترنت، تیم بگو وی‌پی‌ان تمام تلاش خودش رو کرد تا شما عزیزان همچنان به دنیای آزاد اینترنت متصل بمونید❤️با وجود تمام محدودیت‌ها سعی کردیم هم به‌صورت رایگان در کنارتون باشیم و هم سرویس‌های پایدار و باکیفیت ارائه بدیم🙏خوشحالیم که دوباره اینترنت…
+
+---
+
+🔥تیم Begoo VPN دوباره برگشت!🔥باکانفیگ‌های جدید و پرسرعت🚀⚡سرور مستقیم:هر گیگ فقط3,000 تومان🚀سرور تانل:هر گیگ فقط7,000 تومان💎کیفیت بالا | سرعت عالی | کانفیگ‌های جدید🛒خرید و دریافت کانفیگ:👉@Begoo_VPN_Bot🔥Begoo VPN | دوباره در خدمت شما
+
+---
+
+نیاز به پشتیبانی داشتید هم از داخل ربات میتونید پیامتون رو ارسال کنید و هم از طریق پیوی ادمین@Begoo_VPN_Admin
