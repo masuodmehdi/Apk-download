@@ -1,4 +1,4 @@
-📡 fetched at 2026-08-26 16:12:16
+📡 fetched at 2026-08-26 18:13:50
 ==================================================
 
 vless://d8523317-503e-43ad-b2c3-e5f77d725848@31.76.46.138:20422?security=reality&encryption=none&pbk=ZUQTvwYk_hDqSrw36uc18MkeEIXIGZZGsf5XWVwdqAQ&headerType=none&fp=random&spx=%2F&type=tcp&sni=yahoo.com&sid=90#%40Begoo_VPN%20%C2%B2%E2%81%B6%E2%81%B8
@@ -81,4 +81,8 @@ vmess://eyJhZGQiOiJhc2lhLnNlcnZvY2Vhbi5pciIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIi
 
 ---
 
-نیاز به پشتیبانی داشتید هم از داخل ربات میتونید پیامتون رو ارسال کنید و هم از طریق پیوی ادمین@Begoo_VPN_Admin
+🔥تیم Begoo VPN دوباره برگشت!🔥با کانفیگ‌های جدید و پرسرعت🚀⚡سرور مستقیم: هر گیگ فقط 3,000 تومان🚀سرور تانل: هر گیگ فقط 7,000 تومان💎کیفیت بالا | سرعت عالی | کانفیگ‌های جدید🛒خرید و دریافت کانفیگ:👉@Begoo_VPN_Bot🔥Begoo VPN | دوباره در خدمت…
+
+---
+
+vless://e0e49d1c-c56b-4347-9053-6cbed0966124@81.12.54.134:5050?path=%2F&security=tls&encryption=mlkem768x25519plus.native.0rtt.xsgWa17yg5fJYQ9pJ7WZWh8gcxREtb9PuXjnIgV0Ghs&insecure=0&host=tr.begooserver.xyz&fp=chrome&ech=AGX%2BDQBhAAAgACApzIl6tYbaaw%2FtgSCpR2Z4HZ9Qzd%2FEfewgX27QfLn%2FbAAkAAEAAQABAAIAAQADAAIAAQACAAIAAgADAAMAAQADAAIAAwADABJ0ci5iZWdvb3NlcnZlci54eXoAAA%3D%3D&type=ws&allowInsecure=0&sni=tr.begooserver.xyz#%40Beoo_VPN30 گیگ تست از کانفیگ تانلمونتمام شد❌
