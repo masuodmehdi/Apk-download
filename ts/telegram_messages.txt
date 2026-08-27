@@ -1,9 +1,5 @@
-📡 fetched at 2026-08-27 06:31:45
+📡 fetched at 2026-08-27 18:05:45
 ==================================================
-
-vless://7bd8e88e-56d3-4396-87b3-854315db88f5@2.27.18.136:443?security=reality&encryption=none&pbk=lFP2ImTpt15m2yw6EivkehLp6smfaH8GRDoXdmcJbVM&headerType=none&fp=firefox&spx=%2F&type=tcp&sni=www.icloud.com&sid=f070801a38d9f30e#%40Begoo_VPN%20%C2%B2%E2%81%B6%E2%81%B9
-
----
 
 ss://YWVzLTEyOC1nY206d3JEQ3Y4TzB3b28zdzVoeE14eFl3cW5EZ0YxRFRsSkVFUUREaWtjOHc1UENzMFFBd3BnVndxOHp3N2Nw@192.220.32.7:54804#%40Begoo_VPN%20%C2%B2%E2%81%B7%E2%81%B0
 
@@ -86,3 +82,7 @@ vless://e0e49d1c-c56b-4347-9053-6cbed0966124@81.12.54.134:5050?path=%2F&security
 ---
 
 vless://6d60c73d-5915-4cf8-b155-e522dfd863bb@31.128.37.67:16560?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B8%E2%81%B6
+
+---
+
+تست سرعت سرور تانلبرای دریافت سرور های تانل و مستقیم کلیک کنید👇👇👇@Begoo_VPN_Bot
