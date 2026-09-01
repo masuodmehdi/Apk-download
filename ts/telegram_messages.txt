@@ -1,13 +1,5 @@
-📡 fetched at 2026-09-01 21:53:15
+📡 fetched at 2026-09-01 23:43:04
 ==================================================
-
-vless://d3074030-0133-4691-ac4c-f8b8321b522a@77.221.141.20:20851?path=%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN%2FBegoo_VPN&security=none&encryption=none&host=cdn-apple.com&type=httpupgrade#%40Begoo_VPN%20%C2%B2%E2%81%B7%E2%81%B8
-
----
-
-vless://fe28f746-6051-481c-801c-1d153ebc5995@pichi.picmusic.ir:15882?security=reality&encryption=none&pbk=gZT_3S5MB7JX7lYznOoo9CgMXpJtwEy7ChVtybbUjz4&headerType=none&fp=chrome&spx=%2F&type=tcp&sni=arxiv.org&sid=f378eb2f#%40Begoo_VPN%20%C2%B2%E2%81%B7%E2%81%B9
-
----
 
 vless://0a54534f-8a65-42f7-ae91-573ae0bf09b7@2.26.194.15:443?security=reality&encryption=none&pbk=vqxKvKPwdM4NB1EnIAy90LSglZM9oTRx995mUQIW2Rg&headerType=none&fp=firefox&spx=%2F&type=tcp&sni=www.intel.com&sid=6bd15a#%40Begoo_VPN%20%C2%B2%E2%81%B8%E2%81%B0
 
@@ -86,3 +78,11 @@ hysteria2://5bcodmhjtyfyyrqh@91.142.73.159:36758?security=tls&obfs=salamander&ob
 ---
 
 هر مشکلی توی ربات داشتید میتونید هم از داخل ربات به پشتیبانی پیام بدید و هم از طریق پیوی ادمین@Begoo_VPN_Bot@Begoo_VPN_Admin
+
+---
+
+vless://c87e551b-3999-4b76-b3bf-bdfd6ef176fd@153.76.208.232:443?security=reality&encryption=none&pbk=kCKXYcvEQ2cz4d0jBmBjyzbesUZ3AHQBukhqXWPiRlA&headerType=none&fp=chrome&spx=%2Fc1762d24c4fc297&type=tcp&sni=yandex.com.am&sid=f3deb2#%40Begoo_VPN%20%C2%B2%E2%81%B9%C2%B9
+
+---
+
+vless://0cfc585b-26f2-4597-9b70-e1bb1095a2f2@89.127.204.17:8443?security=reality&encryption=none&pbk=o8nHj0HmBGPkdRVTSrWd1r2eXPH5YRKDNfKY1FKvRCY&headerType=none&fp=chrome&spx=%2FmLLEKOBpOSMZdf4&type=tcp&flow=xtls-rprx-vision&sni=yandex.aero&sid=dfc3#%40Begoo_VPN%20%C2%B2%E2%81%B9%C2%B2
