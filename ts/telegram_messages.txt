@@ -1,9 +1,5 @@
-📡 fetched at 2026-09-03 13:43:02
+📡 fetched at 2026-09-03 17:25:25
 ==================================================
-
-vless://0a54534f-8a65-42f7-ae91-573ae0bf09b7@2.26.194.15:443?security=reality&encryption=none&pbk=vqxKvKPwdM4NB1EnIAy90LSglZM9oTRx995mUQIW2Rg&headerType=none&fp=firefox&spx=%2F&type=tcp&sni=www.intel.com&sid=6bd15a#%40Begoo_VPN%20%C2%B2%E2%81%B8%E2%81%B0
-
----
 
 vless://5d5c40b1-102c-4343-94cc-d5b794dbd0c6@139.28.241.77:443?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B8%C2%B9
 
@@ -90,3 +86,7 @@ vless://0cfc585b-26f2-4597-9b70-e1bb1095a2f2@89.127.204.17:8443?security=reality
 ---
 
 سرور های تانل بدون قطعی هستن و پرقدرت وصل بودن و هستن❤️هر مشکلی توی ربات داشتید میتونید هم از داخل ربات به پشتیبانی پیام بدید و هم از طریق پیوی ادمین@Begoo_VPN_Bot@Begoo_VPN_Admin
+
+---
+
+vless://a3bd1997-6f78-4e61-83e1-4f5d5000ed24@78.17.41.122:42262?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B9%C2%B3
