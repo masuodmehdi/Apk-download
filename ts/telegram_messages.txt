@@ -1,9 +1,5 @@
-📡 fetched at 2026-09-10 07:27:21
+📡 fetched at 2026-09-10 12:19:11
 ==================================================
-
-vless://5d5c40b1-102c-4343-94cc-d5b794dbd0c6@139.28.241.77:443?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B8%C2%B9
-
----
 
 vless://ad192c6d-c5ee-4a21-a6bf-85218caa4ef9@192.220.15.222:8443?mode=auto&path=%2F&security=reality&encryption=none&extra=%7B%22xPaddingBytes%22%3A%22100-1000%22%7D&pbk=lfOSEE80tv3mvi9fSBcj-oLKDJm2lmdj1PIMLvKwxRc&fp=chrome&spx=%2F&type=xhttp&sni=www.amd.com&sid=69#%40Begoo_VPN%20%C2%B2%E2%81%B8%C2%B2
 
@@ -90,3 +86,7 @@ vless://0cfc585b-26f2-4597-9b70-e1bb1095a2f2@89.127.204.17:8443?security=reality
 ---
 
 vless://a3bd1997-6f78-4e61-83e1-4f5d5000ed24@78.17.41.122:42262?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B9%C2%B3
+
+---
+
+vless://1af93670-c30e-4207-8458-7a0fc5638e53@185.216.71.225:443?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B9%E2%81%B4
