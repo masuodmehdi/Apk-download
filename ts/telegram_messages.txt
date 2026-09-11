@@ -1,21 +1,5 @@
-📡 fetched at 2026-09-11 19:23:10
+📡 fetched at 2026-09-11 21:49:00
 ==================================================
-
-vless://ad192c6d-c5ee-4a21-a6bf-85218caa4ef9@192.220.15.222:8443?mode=auto&path=%2F&security=reality&encryption=none&extra=%7B%22xPaddingBytes%22%3A%22100-1000%22%7D&pbk=lfOSEE80tv3mvi9fSBcj-oLKDJm2lmdj1PIMLvKwxRc&fp=chrome&spx=%2F&type=xhttp&sni=www.amd.com&sid=69#%40Begoo_VPN%20%C2%B2%E2%81%B8%C2%B2
-
----
-
-vless://b19f6b90-52f0-4846-a96f-b67acefadb04@66.33.22.226:50212?mode=stream-up&path=%2F&security=reality&encryption=none&extra=%7B%22xPaddingBytes%22%3A%22100-1000%22%2C%22mode%22%3A%22stream-up%22%2C%22scMaxEachPostBytes%22%3A%221000000%22%7D&pbk=XGf1puinir0mL6oxiyEUs97s7gunaD07xy81_-YV4Uc&fp=chrome&spx=%2F&type=xhttp&sni=help.steampowered.com&sid=5a3ff5a13d#%40Begoo_VPN%20%C2%B2%E2%81%B8%C2%B3
-
----
-
-vless://cd74983f-12f5-4836-aae5-17fbc136f888@153.56.134.149:37217?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B8%E2%81%B4
-
----
-
-vmess://eyJhZGQiOiJhc2lhLnNlcnZvY2Vhbi5pciIsImFpZCI6IjAiLCJhbHBuIjoiIiwiZnAiOiIiLCJob3N0IjoiIiwiaWQiOiJjYTk2NDBhMy1iMjFhLTQwNzMtOTY0Yi04MzE4ODA0OGRkMjIiLCJpbnNlY3VyZSI6IjEiLCJuZXQiOiJ0Y3AiLCJwYXRoIjoiL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTi9CZWdvb19WUE4vQmVnb29fVlBOL0JlZ29vX1ZQTiIsInBvcnQiOiIxMDIwIiwicHMiOiJAQmVnb29fVlBOIMKy4oG44oG1Iiwic2N5IjoiYXV0byIsInNuaSI6IiIsInRscyI6IiIsInR5cGUiOiJub25lIiwidiI6IjIifQ==
-
----
 
 در مدت قطعی اینترنت، تیم بگو وی‌پی‌ان تمام تلاش خودش رو کرد تا شما عزیزان همچنان به دنیای آزاد اینترنت متصل بمونید❤️با وجود تمام محدودیت‌ها سعی کردیم هم به‌صورت رایگان در کنارتون باشیم و هم سرویس‌های پایدار و باکیفیت ارائه بدیم🙏خوشحالیم که دوباره اینترنت…
 
@@ -90,3 +74,19 @@ vless://a3bd1997-6f78-4e61-83e1-4f5d5000ed24@78.17.41.122:42262?security=none&en
 ---
 
 vless://1af93670-c30e-4207-8458-7a0fc5638e53@185.216.71.225:443?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B9%E2%81%B4
+
+---
+
+tg://proxy?port=443&secret=ee63f333a9bcfddb6939823166bdd635c87777772e636c6f7564666c6172652e636f6d&server=45.170.244.95
+
+---
+
+tg://proxy?port=443&secret=ee63f333a9bcfddb6939823166bdd635c87777772e636c6f7564666c6172652e636f6d&server=45.170.244.119
+
+---
+
+tg://proxy?port=443&secret=ee63f333a9bcfddb6939823166bdd635c87777772e636c6f7564666c6172652e636f6d&server=45.164.20.114
+
+---
+
+👩‍🚀کانفیگ‌های تانل پرسرعت و پایدار⚡️مناسب برای اتصال سریع و بدون دردسر📥دریافت و تهیه کانفیگ‌ها از طریق ربات:🤖@Begoo_VPN_Bot❤️‍🔥همین حالا امتحانش کن!
