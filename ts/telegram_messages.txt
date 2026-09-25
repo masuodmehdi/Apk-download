@@ -1,9 +1,5 @@
-📡 fetched at 2026-09-25 14:01:20
+📡 fetched at 2026-09-25 18:46:54
 ==================================================
-
-vless://6d60c73d-5915-4cf8-b155-e522dfd863bb@31.128.37.67:16560?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B8%E2%81%B6
-
----
 
 تست سرعت سرور تانلبرای دریافت سرور های تانل و مستقیم کلیک کنید👇👇👇@Begoo_VPN_Bot
 
@@ -82,3 +78,7 @@ vless://931220c8-15ac-41f4-ba7b-8736a82a3ba2@45.64.74.100:15570?security=reality
 ---
 
 👩‍🚀کانفیگ‌های تانل پرسرعت و پایدار⚡️مناسب برای اتصال سریع و بدون دردسر📥دریافت و تهیه کانفیگ‌ها از طریق ربات:🤖@Begoo_VPN_Bot❤️‍🔥همین حالا امتحانش کن!
+
+---
+
+vless://9aab8f39-ccb3-44ea-acdc-a8aefe211287@45.164.20.114:10226?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B9%E2%81%B7
