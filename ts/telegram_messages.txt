@@ -1,17 +1,5 @@
-📡 fetched at 2026-10-09 08:15:44
+📡 fetched at 2026-10-09 15:26:00
 ==================================================
-
-تست سرعت سرور تانلبرای دریافت سرور های تانل و مستقیم کلیک کنید👇👇👇@Begoo_VPN_Bot
-
----
-
-📢اطلاعیهدرود و وقت بخیر🌹به دلیل فیلتر شدن دامین، سرورهای مستقیم در حال حاضر از دسترس خارج شده‌اند. با توجه به اینکه امروز جمعه است، جایگزینی و راه‌اندازی دامین جدید کمی زمان‌بر شده است.🔹در حال حاضرسرورهای تانل پرقدرت بدون مشکل فعال و متصل هستندو می‌توانید از آن‌ها استفاده کنید.از صبوری و همراهی شما صمیمانه سپاسگزاریم❤️🙏
-
----
-
-vless://c8c06f90-c267-47a6-a91a-967e58e61db0@204.44.127.222:37262?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B8%E2%81%B7
-
----
 
 vless://8ff24c63-a8ab-443b-98c4-cf2ea1741382@38.148.253.32:9443?security=reality&encryption=none&pbk=z5ey3dBNwJciLD1_V2P_rKYGEd2Lk_V1IOl2uRDZwhQ&headerType=none&fp=chrome&spx=%2F&type=tcp&flow=xtls-rprx-vision&sni=blog.jetbrains.com&sid=f5b880a0529326c1#%40Begoo_VPN%20%C2%B2%E2%81%B8%E2%81%B8
 
@@ -82,3 +70,11 @@ vless://931220c8-15ac-41f4-ba7b-8736a82a3ba2@45.64.74.100:15570?security=reality
 ---
 
 vless://9aab8f39-ccb3-44ea-acdc-a8aefe211287@45.164.20.114:10226?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B9%E2%81%B7
+
+---
+
+User:caxUAxrEwJZC85KrjJqz9g2fPass:CGSg9Pvj2MHVEpwyuKRnz7vvLocation:tr🇹🇷
+
+---
+
+Wire guard
