@@ -1,4 +1,4 @@
-📡 fetched at 2026-10-10 00:09:46
+📡 fetched at 2026-10-10 06:08:52
 ==================================================
 
 vless://8ff24c63-a8ab-443b-98c4-cf2ea1741382@38.148.253.32:9443?security=reality&encryption=none&pbk=z5ey3dBNwJciLD1_V2P_rKYGEd2Lk_V1IOl2uRDZwhQ&headerType=none&fp=chrome&spx=%2F&type=tcp&flow=xtls-rprx-vision&sni=blog.jetbrains.com&sid=f5b880a0529326c1#%40Begoo_VPN%20%C2%B2%E2%81%B8%E2%81%B8
