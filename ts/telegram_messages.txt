@@ -1,13 +1,5 @@
-📡 fetched at 2026-11-13 16:38:21
+📡 fetched at 2026-11-13 22:19:33
 ==================================================
-
-📢اطلاعیه مهم  درود و وقت بخیر🌹لطفاً از داخل ربات، وارد بخش «سرویس‌های من» شوید و لینک سابسکریپشن جدید خود را دریافت کنید و کانفیگ‌های جدید را بردارید.🔴با توجه به دردسرها و مشکلات متعدد سرورهای مستقیم، تصمیم گرفتیم سرورهای مستقیم را به‌طور کامل جمع‌آوری…
-
----
-
-سرور های تانل بدون قطعی هستن و پرقدرت وصل بودن و هستن❤️هر مشکلی توی ربات داشتید میتونید هم از داخل ربات به پشتیبانی پیام بدید و هم از طریق پیوی ادمین@Begoo_VPN_Bot@Begoo_VPN_Admin
-
----
 
 vless://a3bd1997-6f78-4e61-83e1-4f5d5000ed24@78.17.41.122:42262?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B9%C2%B3
 
@@ -82,3 +74,7 @@ nl-ams.prod.surfshark.comsurfshark_openvpn_tcp.ovpn
 ---
 
 vless://2b043155-1d88-44fc-b612-abb7d9fa675e@192.3.153.192:8855?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B9%E2%81%B8
+
+---
+
+ss://YWVzLTI1Ni1nY206WlJwZ2FCZUd4dEVOSVhndmhwa1pCS3o5R25XUlMyZFljeDlPK2EyaXdOND0@185.176.204.18:19999#%40Begoo_VPN%20%C2%B2%E2%81%B9%E2%81%B9
