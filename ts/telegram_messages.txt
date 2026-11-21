@@ -1,17 +1,5 @@
-📡 fetched at 2026-11-21 09:01:30
+📡 fetched at 2026-11-21 16:52:55
 ==================================================
-
-vless://1af93670-c30e-4207-8458-7a0fc5638e53@185.216.71.225:443?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B2%E2%81%B9%E2%81%B4
-
----
-
-tg://proxy?port=443&secret=ee63f333a9bcfddb6939823166bdd635c87777772e636c6f7564666c6172652e636f6d&server=45.170.244.95
-
----
-
-tg://proxy?port=443&secret=ee63f333a9bcfddb6939823166bdd635c87777772e636c6f7564666c6172652e636f6d&server=45.170.244.119
-
----
 
 tg://proxy?port=443&secret=ee63f333a9bcfddb6939823166bdd635c87777772e636c6f7564666c6172652e636f6d&server=45.164.20.114
 
@@ -78,3 +66,15 @@ ss://YWVzLTI1Ni1nY206WlJwZ2FCZUd4dEVOSVhndmhwa1pCS3o5R25XUlMyZFljeDlPK2EyaXdOND0
 ---
 
 tg://proxy?port=8443&secret=ee89c6e505e20a156d0a4e0067054fb4567777772e636c6f7564666c6172652e636f6d&server=188.40.209.85
+
+---
+
+vless://5ab065b0-2c7a-45a0-829d-9af9af7d8e05@152.53.120.90:50955?security=none&encryption=none&headerType=none&type=tcp#%40Begoo_VPN%20%C2%B3%E2%81%B0%C2%B9
+
+---
+
+vless://5980f1e1-970c-43b9-b3e8-a8ddd70ceadc@158.220.95.242:443?security=reality&encryption=none&pbk=PCm0k-SvNd00cgNuqqnbCzmwVZd5vkgX2ZLk2_qngRs&headerType=none&fp=chrome&spx=%2F97e87bd21631e30&type=tcp&flow=xtls-rprx-vision&sni=www.samsung.com&sid=b60a93#%40Begoo_VPN%20%C2%B3%E2%81%B0%C2%B2
+
+---
+
+vless://51a6ab93-e805-4b8b-89d1-d3ab85a118ce@54.36.102.152:2083?path=%2Fvless-kulo&security=none&encryption=none&type=ws#%40Begoo_VPN%20%C2%B3%E2%81%B0%C2%B3
